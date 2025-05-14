@@ -1,5 +1,3 @@
-// D:\NodeJs\models\student.js
-
 const pool = require('../db/pool');
 
 const createStudent = async (name, email, course) => {
