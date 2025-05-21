@@ -13,4 +13,23 @@ const getAllStudents = async () => {
   return res.rows;
 };
 
-module.exports = { createStudent, getAllStudents };
+// Update a student
+const updateStudent = async (id, name, email, course) => {
+  const result = await pool.query(
+    'UPDATE students SET name = $1, email = $2, course = $3 WHERE id = $4 RETURNING *',
+    [name, email, course, id]
+  );
+  return result.rows[0];
+};
+
+// Delete a student
+const deleteStudent = async (id) => {
+  await pool.query('DELETE FROM students WHERE id = $1', [id]);
+};
+
+module.exports = {
+  createStudent,
+  getAllStudents,
+  updateStudent,
+  deleteStudent,
+};
